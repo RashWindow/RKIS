@@ -1,0 +1,28 @@
+18:11:55.854 [main] INFO  com.example.engine.EngineApp - Starting EngineApp using Java 21.0.8 with PID 22648 (C:\student\RKIS\fir\engine_app\target\classes started by Игнатий in C:\student\RKIS\fir\engine_app)
+18:11:55.856 [main] DEBUG com.example.engine.EngineApp - Running with Spring Boot v3.3.4, Spring v6.1.13
+18:11:55.858 [main] INFO  com.example.engine.EngineApp - The following 1 profile is active: "dev"
+18:11:56.697 [main] DEBUG o.s.a.a.a.ReflectiveAspectJAdvisorFactory - Found AspectJ method: public void com.example.engine.LoggerAspect.logMethodCall(org.aspectj.lang.JoinPoint)
+18:11:56.706 [main] DEBUG o.s.a.a.a.ReflectiveAspectJAdvisorFactory - Found AspectJ method: public void com.example.engine.LoggerAspect.logMethodReturn(org.aspectj.lang.JoinPoint,java.lang.Object)
+18:11:56.713 [main] DEBUG o.s.a.a.a.ReflectiveAspectJAdvisorFactory - Found AspectJ method: public void com.example.engine.LoggerAspect.logMethodException(org.aspectj.lang.JoinPoint,java.lang.Throwable)
+18:11:57.043 [main] INFO  com.example.engine.EngineApp - Started EngineApp in 1.85 seconds (process running for 2.381)
+18:11:57.053 [main] INFO  com.example.engine.LoggerAspect - Called method: run with arguments: [[Ljava.lang.String;@48535004]
+2025-09-28 18:39:50.305 [main] INFO  com.example.engine.EngineApp - Starting EngineApp using Java 21.0.8 with PID 30168 (C:\student\RKIS\fir\engine_app\target\classes started by Игнатий in C:\student\RKIS\fir\engine_app)
+2025-09-28 18:39:50.307 [main] DEBUG com.example.engine.EngineApp - Running with Spring Boot v3.3.4, Spring v6.1.13
+2025-09-28 18:39:50.309 [main] INFO  com.example.engine.EngineApp - The following 1 profile is active: "dev"
+2025-09-28 18:39:50.735 [main] DEBUG o.s.a.a.a.ReflectiveAspectJAdvisorFactory - Found AspectJ method: public void com.example.engine.LoggerAspect.logMethodCall(org.aspectj.lang.JoinPoint)
+2025-09-28 18:39:50.737 [main] DEBUG o.s.a.a.a.ReflectiveAspectJAdvisorFactory - Found AspectJ method: public void com.example.engine.LoggerAspect.logMethodReturn(org.aspectj.lang.JoinPoint,java.lang.Object)
+2025-09-28 18:39:50.742 [main] DEBUG o.s.a.a.a.ReflectiveAspectJAdvisorFactory - Found AspectJ method: public void com.example.engine.LoggerAspect.logMethodException(org.aspectj.lang.JoinPoint,java.lang.Throwable)
+2025-09-28 18:39:51.098 [main] INFO  com.example.engine.EngineApp - Started EngineApp in 1.222 seconds (process running for 1.562)
+2025-09-28 18:39:51.129 [main] INFO  com.example.engine.LoggerAspect - Called method: run with arguments: [[Ljava.lang.String;@2fc07784]
+2025-09-28 18:39:58.625 [main] INFO  com.example.engine.LoggerAspect - Called method: addEngine with arguments: [InternalCombustionEngine{power=3.0, model='4', cylinders=5, fuelType='6'}]
+2025-09-28 18:39:58.627 [main] INFO  com.example.engine.LoggerAspect - Method: addEngine returned: null
+2025-09-28 18:40:17.755 [main] INFO  com.example.engine.LoggerAspect - Called method: getAllEngines with arguments: []
+2025-09-28 18:40:17.757 [main] INFO  com.example.engine.LoggerAspect - Method: getAllEngines returned: [InternalCombustionEngine{power=3.0, model='4', cylinders=5, fuelType='6'}]
+2025-09-28 18:40:30.142 [main] INFO  com.example.engine.LoggerAspect - Called method: addEngine with arguments: [InternalCombustionEngine{power=3.0, model='4', cylinders=5, fuelType='6'}]
+2025-09-28 18:40:30.143 [main] INFO  com.example.engine.LoggerAspect - Method: addEngine returned: null
+2025-09-28 18:40:39.454 [main] INFO  com.example.engine.LoggerAspect - Called method: getAllEngines with arguments: []
+2025-09-28 18:40:39.455 [main] INFO  com.example.engine.LoggerAspect - Method: getAllEngines returned: [InternalCombustionEngine{power=3.0, model='4', cylinders=5, fuelType='6'}, InternalCombustionEngine...
+2025-09-28 18:40:39.456 [main] INFO  com.example.engine.LoggerAspect - Called method: getAllEngines with arguments: []
+2025-09-28 18:40:39.457 [main] INFO  com.example.engine.LoggerAspect - Method: getAllEngines returned: [InternalCombustionEngine{power=3.0, model='4', cylinders=5, fuelType='6'}, InternalCombustionEngine...
+2025-09-28 18:40:41.728 [main] INFO  com.example.engine.LoggerAspect - Called method: compareEngines with arguments: [0, 1]
+2025-09-28 18:40:41.730 [main] INFO  com.example.engine.LoggerAspect - Method: compareEngines returned: true

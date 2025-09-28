@@ -1,0 +1,10 @@
+2025-09-28 18:44:38.992 [main] INFO  com.example.engine.EngineApp - Starting EngineApp using Java 21.0.8 with PID 31344 (C:\student\RKIS\fir\engine_app\target\classes started by Игнатий in C:\student\RKIS\fir)
+2025-09-28 18:44:38.993 [main] DEBUG com.example.engine.EngineApp - Running with Spring Boot v3.3.4, Spring v6.1.13
+2025-09-28 18:44:38.994 [main] INFO  com.example.engine.EngineApp - The following 1 profile is active: "dev"
+2025-09-28 18:44:39.434 [main] DEBUG o.s.a.a.a.ReflectiveAspectJAdvisorFactory - Found AspectJ method: public void com.example.engine.LoggerAspect.logMethodCall(org.aspectj.lang.JoinPoint)
+2025-09-28 18:44:39.442 [main] DEBUG o.s.a.a.a.ReflectiveAspectJAdvisorFactory - Found AspectJ method: public void com.example.engine.LoggerAspect.logMethodReturn(org.aspectj.lang.JoinPoint,java.lang.Object)
+2025-09-28 18:44:39.447 [main] DEBUG o.s.a.a.a.ReflectiveAspectJAdvisorFactory - Found AspectJ method: public void com.example.engine.LoggerAspect.logMethodException(org.aspectj.lang.JoinPoint,java.lang.Throwable)
+2025-09-28 18:44:39.860 [main] INFO  com.example.engine.EngineApp - Started EngineApp in 1.197 seconds (process running for 1.578)
+2025-09-28 18:44:39.890 [main] INFO  com.example.engine.LoggerAspect - Called method: run with arguments: [[Ljava.lang.String;@660591fb]
+2025-09-28 18:44:48.819 [main] INFO  com.example.engine.LoggerAspect - Called method: addEngine with arguments: [InternalCombustionEngine{power=3.0, model='4', cylinders=5, fuelType='6'}]
+2025-09-28 18:44:48.821 [main] INFO  com.example.engine.LoggerAspect - Method: addEngine returned: null

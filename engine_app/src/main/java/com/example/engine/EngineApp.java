@@ -1,229 +1,41 @@
 package com.example.engine;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Scanner; import java.util.*;
-public class EngineApp {
-    static class Engine {
-        protected double power;
-        protected String model;
-        
-        public Engine() {
-            this(0.0, "Unknown");
-        }
-        
-        public Engine(double power, String model) {
-            validatePower(power);
-            this.power = power;
-            this.model = model;
-        }
-        
-        private void validatePower(double power) {
-            if (power < 0) {
-                throw new IllegalArgumentException("Мощность не может быть отрицательной");
-            }
-        }
-        
-        @Override
-        public boolean equals(Object o) {
-            if (this == o) return true;
-            if (o == null || getClass() != o.getClass()) return false;
-            Engine engine = (Engine) o;
-            return Double.compare(engine.power, power) == 0 &&
-                    Objects.equals(model, engine.model);
-        }
-        
-        @Override
-        public int hashCode() {
-            return Objects.hash(power, model);
-        }
-        
-        @Override
-        public String toString() {
-            return "Engine{power=" + power + ", model='" + model + "'}";
-        }
-    }
+import java.util.*;
+import org.springframework.boot.CommandLineRunner;
+import org.springframework.boot.SpringApplication;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.context.annotation.EnableAspectJAutoProxy;
+import org.springframework.beans.factory.annotation.Autowired;
 
-    static class InternalCombustionEngine extends Engine {
-        protected int cylinders;
-        protected String fuelType;
-        
-        public InternalCombustionEngine() {
-            this(0.0, "Unknown", 0, "Gasoline");
-        }
-        
-        public InternalCombustionEngine(double power, String model, int cylinders, String fuelType) {
-            super(power, model);
-            validateCylinders(cylinders);
-            this.cylinders = cylinders;
-            this.fuelType = fuelType;
-        }
-        
-        private void validateCylinders(int cylinders) {
-            if (cylinders < 0) {
-                throw new IllegalArgumentException("Количество цилиндров не может быть отрицательным");
-            }
-        }
-        
-        @Override
-        public boolean equals(Object o) {
-            if (this == o) return true;
-            if (o == null || getClass() != o.getClass()) return false;
-            if (!super.equals(o)) return false;
-            InternalCombustionEngine that = (InternalCombustionEngine) o;
-            return cylinders == that.cylinders &&
-                    Objects.equals(fuelType, that.fuelType);
-        }
-        
-        @Override
-        public int hashCode() {
-            return Objects.hash(super.hashCode(), cylinders, fuelType);
-        }
-        
-        @Override
-        public String toString() {
-            return "InternalCombustionEngine{" +
-                    "power=" + power +
-                    ", model='" + model + '\'' +
-                    ", cylinders=" + cylinders +
-                    ", fuelType='" + fuelType + '\'' +
-                    '}';
-        }
-    }
-
-    static class DieselEngine extends InternalCombustionEngine {
-        private double compressionRatio;
-        private String injectionType;
-        
-        public DieselEngine() {
-            this(0.0, "Unknown", 0, "Diesel", 18.0, "Direct");
-        }
-        
-        public DieselEngine(double power, String model, int cylinders, String fuelType, 
-                           double compressionRatio, String injectionType) {
-            super(power, model, cylinders, fuelType);
-            validateCompressionRatio(compressionRatio);
-            this.compressionRatio = compressionRatio;
-            this.injectionType = injectionType;
-        }
-        
-        private void validateCompressionRatio(double compressionRatio) {
-            if (compressionRatio < 0) {
-                throw new IllegalArgumentException("Степень сжатия не может быть отрицательной");
-            }
-        }
-        
-        @Override
-        public boolean equals(Object o) {
-            if (this == o) return true;
-            if (o == null || getClass() != o.getClass()) return false;
-            if (!super.equals(o)) return false;
-            DieselEngine that = (DieselEngine) o;
-            return Double.compare(that.compressionRatio, compressionRatio) == 0 &&
-                    Objects.equals(injectionType, that.injectionType);
-        }
-        
-        @Override
-        public int hashCode() {
-            return Objects.hash(super.hashCode(), compressionRatio, injectionType);
-        }
-        
-        @Override
-        public String toString() {
-            return "DieselEngine{" +
-                    "power=" + power +
-                    ", model='" + model + '\'' +
-                    ", cylinders=" + cylinders +
-                    ", fuelType='" + fuelType + '\'' +
-                    ", compressionRatio=" + compressionRatio +
-                    ", injectionType='" + injectionType + '\'' +
-                    '}';
-        }
-    }
-
-    static class JetEngine extends Engine {
-        private double thrust;
-        private String bypassType;
-        
-        public JetEngine() {
-            this(0.0, "Unknown", 0.0, "Low-bypass");
-        }
-        
-        public JetEngine(double power, String model, double thrust, String bypassType) {
-            super(power, model);
-            validateThrust(thrust);
-            this.thrust = thrust;
-            this.bypassType = bypassType;
-        }
-        
-        private void validateThrust(double thrust) {
-            if (thrust < 0) {
-                throw new IllegalArgumentException("Тяга не может быть отрицательной");
-            }
-        }
-        
-        @Override
-        public boolean equals(Object o) {
-            if (this == o) return true;
-            if (o == null || getClass() != o.getClass()) return false;
-            if (!super.equals(o)) return false;
-            JetEngine jetEngine = (JetEngine) o;
-            return Double.compare(jetEngine.thrust, thrust) == 0 &&
-                    Objects.equals(bypassType, jetEngine.bypassType);
-        }
-        
-        @Override
-        public int hashCode() {
-            return Objects.hash(super.hashCode(), thrust, bypassType);
-        }
-        
-        @Override
-        public String toString() {
-            return "JetEngine{" +
-                    "power=" + power +
-                    ", model='" + model + '\'' +
-                    ", thrust=" + thrust +
-                    ", bypassType='" + bypassType + '\'' +
-                    '}';
-        }
-    }
-
-    static class Logger {
-        public static void logMethodCall(String methodName, Object[] args) {
-            System.out.println("[LOG] Вызов метода: " + methodName + " с аргументами: " + Arrays.toString(args));
-        }
-        
-        public static void logReturn(String methodName, Object result) {
-            System.out.println("[LOG] Метод " + methodName + " вернул: " + result);
-        }
-        
-        public static void logException(String methodName, Exception ex) {
-            System.out.println("[LOG] Метод " + methodName + " вызвал исключение: " + ex.getMessage());
-        }
-    }
-
-    private List<Engine> engines = new ArrayList<>();
-    private Scanner scanner = new Scanner(System.in);
+@SpringBootApplication
+@EnableAspectJAutoProxy 
+public class EngineApp implements CommandLineRunner {
     
-    public void run() {
+    @Autowired
+    private EngineService engineService;
+    
+    private Scanner scanner = new Scanner(System.in);
+
+    @Override
+    public void run(String... args) {
+        this.runApplication();
+    }
+    
+    public void runApplication() {
         while (true) {
             printMenu();
             int choice = readIntInput("Выберите пункт меню: ", 1, 5);
             
             switch (choice) {
                 case 1:
-                    Logger.logMethodCall("addEngine", new Object[]{});
                     addEngine();
                     break;
                 case 2:
-                    Logger.logMethodCall("removeEngine", new Object[]{});
                     removeEngine();
                     break;
                 case 3:
-                    Logger.logMethodCall("printEngines", new Object[]{});
                     printEngines();
                     break;
                 case 4:
-                    Logger.logMethodCall("compareEngines", new Object[]{});
                     compareEngines();
                     break;
                 case 5:
@@ -280,17 +92,16 @@ public class EngineApp {
                     throw new IllegalArgumentException("Неверный тип двигателя");
             }
             
-            engines.add(engine);
-            Logger.logReturn("addEngine", "Двигатель добавлен: " + engine);
+            engineService.addEngine(engine);
             System.out.println("Двигатель добавлен: " + engine);
         } catch (IllegalArgumentException e) {
-            Logger.logException("addEngine", e);
             System.out.println("Ошибка: " + e.getMessage());
         }
     }
     
     private void removeEngine() {
         try {
+            List<Engine> engines = engineService.getAllEngines();
             if (engines.isEmpty()) {
                 System.out.println("Список двигателей пуст.");
                 return;
@@ -299,17 +110,16 @@ public class EngineApp {
             printEngines();
             int index = readIntInput("Введите индекс для удаления: ", 0, engines.size() - 1);
             
-            Engine removed = engines.remove(index);
-            Logger.logReturn("removeEngine", "Удален двигатель: " + removed);
-            System.out.println("Удален двигатель: " + removed);
+            engineService.removeEngine(index);
+            System.out.println("Удален двигатель по индексу: " + index);
         } catch (Exception e) {
-            Logger.logException("removeEngine", e);
             System.out.println("Ошибка: " + e.getMessage());
         }
     }
     
     private void printEngines() {
         try {
+            List<Engine> engines = engineService.getAllEngines();
             if (engines.isEmpty()) {
                 System.out.println("Список двигателей пуст.");
                 return;
@@ -319,15 +129,14 @@ public class EngineApp {
             for (int i = 0; i < engines.size(); i++) {
                 System.out.println(i + ": " + engines.get(i));
             }
-            Logger.logReturn("printEngines", "Выведено " + engines.size() + " двигателей");
         } catch (Exception e) {
-            Logger.logException("printEngines", e);
             System.out.println("Ошибка: " + e.getMessage());
         }
     }
     
     private void compareEngines() {
         try {
+            List<Engine> engines = engineService.getAllEngines();
             if (engines.size() < 2) {
                 System.out.println("Недостаточно элементов для сравнения.");
                 return;
@@ -337,11 +146,7 @@ public class EngineApp {
             int index1 = readIntInput("Введите индекс первого элемента: ", 0, engines.size() - 1);
             int index2 = readIntInput("Введите индекс второго элемента: ", 0, engines.size() - 1);
             
-            Engine engine1 = engines.get(index1);
-            Engine engine2 = engines.get(index2);
-            
-            boolean isEqual = engine1.equals(engine2);
-            Logger.logReturn("compareEngines", "Сравнение элементов: " + isEqual);
+            boolean isEqual = engineService.compareEngines(index1, index2);
             
             if (isEqual) {
                 System.out.println("Элементы равны.");
@@ -349,12 +154,10 @@ public class EngineApp {
                 System.out.println("Элементы не равны.");
             }
         } catch (Exception e) {
-            Logger.logException("compareEngines", e);
             System.out.println("Ошибка: " + e.getMessage());
         }
     }
     
-    // Вспомогательные методы для ввода данных
     private String readStringInput(String prompt) {
         System.out.print(prompt);
         return scanner.nextLine();
@@ -392,7 +195,8 @@ public class EngineApp {
     }
 
     public static void main(String[] args) {
-        EngineApp app = new EngineApp();
-        app.run();
+        System.setProperty("spring.profiles.active", "dev");
+        System.setProperty("logging.level.com.example.engine", "TRACE");
+        SpringApplication.run(EngineApp.class, args);
     }
 }

@@ -14,21 +14,46 @@ import org.springframework.stereotype.Component;
 public class LoggerAspect {
     private static final Logger logger = LoggerFactory.getLogger(LoggerAspect.class);
 
-    @Pointcut("execution(* com.example.engine.EngineApp.*(..))")
+    @Pointcut("execution(public * com.example.engine..*(..))")
     public void applicationMethods() {}
 
     @Before("applicationMethods()")
     public void logMethodCall(JoinPoint joinPoint) {
-        logger.info("Called method: {} with arguments: {}", joinPoint.getSignature().getName(), joinPoint.getArgs());
+        String methodName = joinPoint.getSignature().getName();
+        Object[] args = joinPoint.getArgs();
+        
+        String logMessage = String.format("Called method: %s with arguments: %s", 
+                                        methodName, 
+                                        java.util.Arrays.toString(args));
+        logger.info(logMessage);
+        
+        System.out.println("ASPECT LOG - BEFORE: " + logMessage);
     }
 
     @AfterReturning(pointcut = "applicationMethods()", returning = "result")
     public void logMethodReturn(JoinPoint joinPoint, Object result) {
-        logger.info("Method: {} returned: {}", joinPoint.getSignature().getName(), result);
+        String methodName = joinPoint.getSignature().getName();
+        String resultStr = result != null ? result.toString() : "null";
+
+        if (resultStr.length() > 100) {
+            resultStr = resultStr.substring(0, 100) + "...";
+        }
+        
+        String logMessage = String.format("Method: %s returned: %s", methodName, resultStr);
+        logger.info(logMessage);
+        
+        System.out.println("ASPECT LOG - AFTER RETURN: " + logMessage);
     }
 
     @AfterThrowing(pointcut = "applicationMethods()", throwing = "exception")
     public void logMethodException(JoinPoint joinPoint, Throwable exception) {
-        logger.error("Method: {} threw exception: {}", joinPoint.getSignature().getName(), exception.getMessage(), exception);
+        String methodName = joinPoint.getSignature().getName();
+        String logMessage = String.format("Method: %s threw exception: %s", 
+                                        methodName, 
+                                        exception.getMessage());
+        logger.error(logMessage);
+        
+        System.out.println("ASPECT LOG - EXCEPTION: " + logMessage);
+        exception.printStackTrace();
     }
 }
